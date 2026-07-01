@@ -3,29 +3,19 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                echo 'Source code checked out successfully.'
+                git branch: 'main', url: 'https://github.com/Bharatharya1/car-website.git'
             }
         }
 
-        stage('Build') {
+        stage('Deploy Website') {
             steps {
-                sh 'pwd'
-                sh 'ls -la'
+                sh '''
+                cp -r * /var/www/html/
+                '''
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'HTML project verified successfully.'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deployment stage completed.'
-            }
-        }
     }
 }
